@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ean Cummings — Biomedical & Electrical Engineer</title>
+  <meta name="description" content="Portfolio and professional profile of Ean Cummings, Biomedical & Electrical Engineer & Entrepreneur. Education, experience, projects, publications, and contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0c10;        /* dark base */
+      --bg-soft:#111317;
+      --card:#141823;
+      --text:#e6eaf2;
+      --muted:#9aa3b2;
+      --acc:#4cc9f0;       /* accent */
+      --acc-2:#80ed99;     /* secondary accent */
+      --border:rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px,92%);margin-inline:auto}
+    header.site{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(11,12,16,0.85),rgba(11,12,16,0.55));backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{width:38px;height:38px;border-radius:12px;background:radial-gradient(120px 120px at 20% 20%, #4cc9f0, transparent 60%),radial-gradient(140px 140px at 80% 80%, #80ed99, transparent 60%), linear-gradient(135deg,#0b0c10,#1a1f2b);border:1px solid var(--border);box-shadow:var(--shadow)}
+    .brand .name{font-weight:700;letter-spacing:.3px}
+    .links{display:flex;gap:18px;align-items:center}
+    .links a{padding:8px 12px;border-radius:10px;color:var(--muted)}
+    .links a:hover{color:var(--text);background:rgba(255,255,255,0.06)}
+    .cta{padding:8px 14px;border:1px solid var(--acc);border-radius:12px;color:var(--acc);font-weight:600}
+    .cta:hover{background:rgba(76,201,240,.12)}
+
+    .hero{padding:64px 0 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .pill{display:inline-flex;gap:8px;align-items:center;background:rgba(128,237,153,.12);color:#bff1cf;border:1px solid rgba(128,237,153,.25);padding:6px 10px;border-radius:999px;font-size:12px}
+    h1{font-size:42px;line-height:1.12;margin:14px 0 10px}
+    .lead{color:var(--muted);font-size:18px}
+    .actions{display:flex;gap:12px;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid var(--border);background:var(--card);box-shadow:var(--shadow)}
+    .btn.primary{border-color:transparent;background:linear-gradient(135deg,#4cc9f0,#4895ef);color:#041018;font-weight:700}
+    .btn.ghost{background:transparent}
+
+    .card-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin:34px 0}
+    .card{grid-column:span 12;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border:1px solid var(--border);border-radius:18px;padding:18px}
+    .card h3{margin:0 0 6px}
+    .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em}
+
+    .two{grid-column:span 6}
+    .three{grid-column:span 4}
+
+    .section{padding:42px 0}
+    .section h2{font-size:28px;margin:0 0 16px}
+    .meta{color:var(--muted);font-size:14px}
+    .timeline{display:flex;flex-direction:column;gap:14px}
+    .item{padding:16px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01))}
+    .item .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .item h4{margin:0}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{padding:5px 9px;border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--muted)}
+
+    .project{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+    .project .shot{border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+    
+    .project-details{
+        max-height:0;
+        overflow:hidden;
+        transition:max-height .3s ease-in-out;
+        opacity:0;
+    }
+    .project-details.is-open{
+        max-height:1000px;
+        opacity:1;
+        margin-top:12px;
+    }
+    .toggle-btn{
+        background:transparent;
+        color:var(--acc);
+        border:none;
+        padding:0;
+        font-weight:600;
+        font-size:14px;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        gap:6px;
+        transition:color .2s ease-in-out;
+    }
+    .toggle-btn:hover{
+        color:var(--text);
+    }
+    .toggle-btn svg{transition:transform .3s ease-in-out}
+    .toggle-btn.is-open svg{transform:rotate(180deg)}
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+
+    footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .project{grid-template-columns:1fr}
+      .two,.three{grid-column:span 12}
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = [...document.querySelectorAll('section[id]')];
+      const links = [...document.querySelectorAll('.links a[href^="#"]')];
+      const activate = (id) => {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      };
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{ if(entry.isIntersecting){ activate(entry.target.id); }});
+      },{rootMargin:'-50% 0px -40% 0px',threshold:0});
+      sections.forEach(s=>obs.observe(s));
+
+      const em = 'ean.cummings';
+      const dom = 'example.com';
+      const mailLink = document.getElementById('mailto');
+      if(mailLink){
+        const addr = em + '@' + dom;
+        mailLink.href = 'mailto:' + addr;
+        mailLink.textContent = addr;
+      }
+      
+      const toggleButtons = document.querySelectorAll('.toggle-btn');
+      toggleButtons.forEach(button => {
+          button.addEventListener('click', () => {
+              const targetId = button.getAttribute('data-target');
+              const targetElement = document.getElementById(targetId);
+              targetElement.classList.toggle('is-open');
+
+              // Change button text and icon
+              if (targetElement.classList.contains('is-open')) {
+                  button.querySelector('.toggle-text').textContent = 'Show Less';
+              } else {
+                  button.querySelector('.toggle-text').textContent = 'Read More';
+              }
+          });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="name">Ean Cummings</div>
+      </div>
+      <nav class="links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#jobs">Jobs</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#publications">Publications</a>
+        <a href="#beyond">Beyond Work</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="home" aria-label="Introduction">
+      <div>
+        <span class="pill">Biomedical & Electrical Engineer • Entrepreneur • iOS Maker</span>
+        <h1>Hi, I’m <span style="color:var(--acc)">Ean</span>. I design health tech, build data‑driven products, and ship ideas.</h1>
+        <p class="lead">Graduate researcher & builder focused on digital health, biosensing, and human‑centered engineering. I blend rigorous analysis with hands‑on prototyping—from embedded sensors to iOS apps.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">See featured work</a>
+          <a class="btn ghost" href="resume.pdf" download>Download résumé (PDF)</a>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="text-align:center">
+          <img src="images/profile.jpg" alt="Portrait of Ean Cummings" style="width:160px;height:160px;border-radius:24px;margin:14px auto;border:1px solid var(--border)"/>
+          <div class="meta">Based in Iowa • Open to opportunities</div>
+          <div class="tags" style="justify-content:center;margin-top:12px">
+            <span class="tag">Digital Health</span>
+            <span class="tag">Apple HealthKit</span>
+            <span class="tag">Embedded Systems</span>
+            <span class="tag">Swift/SwiftUI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2>About</h2>
+      <div class="card-grid">
+        <article class="card two">
+          <h3>My Story</h3>
+          <p>My passion for engineering began with a simple desire: to help people live healthier lives. While I initially thought that meant becoming a doctor, my curiosity about how things work led me down a different path. The moment I saw the rise of fitness trackers like the Apple Watch, I had an epiphany. If a device could motivate someone to walk 10,000 steps, what could an even smarter device do? My goal is to use technology to empower individuals, providing them with affordable, accessible insights to prevent illness and give them a deeper understanding of their own health.</p>
+        </article>
+        <article class="card two">
+          <h3>My Philosophy</h3>
+          <p>I believe that opportunity favors the bold. If you never ask, the answer is always no. This is what drives me as an entrepreneur and maker—to take a chance on an idea and see it through. It's also why I value a great work ethic above all else. While technical skill is important, I believe a hardworking, eager-to-learn mindset is the most valuable asset in any team. I'm always ready to ask for help when I need it and to learn from the people around me.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <h2>Education</h2>
+      <div class="timeline">
+        <div class="item">
+          <div class="top"><h4>MS, Electrical & Computer Engineering</h4><div class="meta">University of Iowa — Fall 2025 to Fall 2026</div></div>
+          <p>Current coursework includes Optics, Formal Methods (safe code with Alloy & Dafny), and Artificial Intelligence. Future courses include Power Systems, Renewable Energy, and the Internet of Things.</p>
+          <div class="tags">
+            <span class="tag">Optics</span>
+            <span class="tag">Formal Methods</span>
+            <span class="tag">AI</span>
+            <span class="tag">IoT</span>
+            <span class="tag">Renewable Energy</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="top"><h4>BS, Biomedical Engineering (Bioimaging Focus)</h4><div class="meta">University of Iowa — 2021–2025</div></div>
+          <p>Specialization in signal and image processing and circuit design for health monitoring devices. Took extensive coding coursework to support applied biomedical projects.</p>
+          <div class="tags">
+            <span class="tag">Bioimaging</span>
+            <span class="tag">Signal Processing</span>
+            <span class="tag">Circuits</span>
+            <span class="tag">Health Devices</span>
+            <span class="tag">Programming</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="jobs">
+      <h2>Jobs</h2>
+      <div class="timeline">
+        <div class="item">
+          <div class="top"><h4>Lead Student Ambassador</h4><div class="meta">Iowa College of Engineering — 2024–2025</div></div>
+          <p>As the student representation for the College of Engineering, I trained new ambassadors, led tours, participated in panels, and hosted meetings for prospective students and their families. I also helped plan and organize large-scale recruiting events, including E-Day, and managed social media content through Instagram takeovers for both the College and University admissions accounts.</p>
+          <div class="tags"><span class="tag">Leadership</span><span class="tag">Mentorship</span><span class="tag">Communication</span><span class="tag">Event Planning</span></div>
+        </div>
+        <div class="item">
+          <div class="top"><h4>Ambassador</h4><div class="meta">Center for Advancement — 2022–2024</div></div>
+          <p>In this key volunteer role, I planned events and engaged with alumni donors, highlighting the activities and accomplishments of students. My work helped secure vital support for university programs and fostered a culture of entrepreneurship among the student body.</p>
+          <div class="tags"><span class="tag">Fundraising</span><span class="tag">Alumni Relations</span><span class="tag">Event Planning</span></div>
+        </div>
+        <div class="item">
+          <div class="top"><h4>President, Triathlon Club</h4><div class="meta">University of Iowa — 2023–2024</div></div>
+          <p>As president of the collegiate triathlon club, I led a team of competitive athletes, organized training schedules, managed event logistics, and fostered a culture of camaraderie and sportsmanship. This experience strengthened my leadership, organizational, and team management skills.</p>
+          <div class="tags"><span class="tag">Leadership</span><span class="tag">Team Management</span><span class="tag">Athletics</span></div>
+        </div>
+        <div class="item">
+          <div class="top"><h4>Lifeguard & Swim Instructor</h4><div class="meta">Des Moines Park And Recreation Department — 2019–2021</div></div>
+          <p>I was certified in Lifeguarding CPR/AED for Professional Rescuers and First Aid. Beyond supervising pool activity and coordinating safety checks, I also taught and mentored new lifeguards and regularly served as a head guard, overseeing pool operations and staff.</p>
+          <div class="tags"><span class="tag">Safety Training</span><span class="tag">Mentorship</span><span class="tag">First Aid</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+      <div class="timeline">
+        <article class="item project">
+          <div>
+            <h3>Custom Titanium & Steel Bicycles</h3>
+            <p>I designed and fabricated two custom bicycles—a steel gravel bike and a titanium mountain bike—from the ground up, blending engineering design with hands-on fabrication.</p>
+            <div class="project-details" id="bike-details">
+                <p>This project was a hands-on exploration of mechanical design and fabrication. I started by using **Autodesk AutoCAD** to design the complete bike geometry, including the frame and components. The frame itself was made from a combination of lightweight **titanium** and durable **steel**, where I performed all the metal cutting and shaping myself. The final assembly involved **TIG welding** the frame together, a process that required meticulous precision and demonstrated my proficiency in advanced welding techniques.</p>
+            </div>
+            <button class="toggle-btn" data-target="bike-details">
+              <span class="toggle-text">Read More</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="tags"><span class="tag">Mechanical Design</span><span class="tag">CAD</span><span class="tag">Welding</span><span class="tag">Fabrication</span></div>
+          </div>
+          <div class="shot"><img src="https://placehold.co/400x250/111317/9aa3b2?text=Custom+Bicycles+Project" alt="Custom bicycle project mockup"></div>
+        </article>
+        <article class="item project">
+          <div>
+            <h3>EKG</h3>
+            <p>Built a working EKG to monitor heart rate and detect irregular rhythms for a class project.</p>
+            <div class="project-details" id="ekg-details">
+                <p>For a class project, I designed and built a working EKG (electrocardiogram) from the ground up, with the objective of monitoring heart rate and identifying irregular rhythms. The device's circuit included a custom-designed **instrumentation amplifier** and a series of **active filters** (low-pass and high-pass) to capture a clean signal from electrode sensors. A key technical challenge was mitigating 60 Hz electrical noise; I solved this by implementing a **notch filter** in the code to ensure accurate data acquisition. The project successfully demonstrated real-time heart rate detection and irregular rhythm analysis, confirming the design's effectiveness.</p>
+            </div>
+            <button class="toggle-btn" data-target="ekg-details">
+              <span class="toggle-text">Read More</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="tags"><span class="tag">Circuits</span><span class="tag">Biosensors</span><span class="tag">Signal Processing</span><span class="tag">Diagnostics</span></div>
+          </div>
+          <div class="shot"><img src="https://placehold.co/400x250/111317/9aa3b2?text=EKG+Project" alt="EKG project mockup"></div>
+        </article>
+        <article class="item project">
+          <div>
+            <h3>InsulTrack — Smart Insulin Pen Case</h3>
+            <p>I co-led a capstone project that evolved into a company, designing an all-in-one smart insulin pen case and companion app to solve a critical user need.</p>
+            <div class="project-details" id="insultrack-details">
+                <p>My team and I were frustrated by the lack of a comprehensive solution on the market for people who rely on insulin. Current devices were fragmented—some offered dosage tracking, others provided thermal protection, but none addressed all the critical needs of users. Our goal was to create a single device that combines thermal insulation, GPS tracking, dosage logging, and impact protection.</p>
+                <p>The biggest challenge was bridging the gap between different engineering disciplines. We had to seamlessly integrate a complex physical device with its intricate circuitry, then program its hardware to work with a companion app. This process taught me a fundamental lesson: engineering isn't just about what you learn in a textbook, it's about the iterative, real-world process of getting something wrong and going back to the drawing board.</p>
+                <p>To provide a full solution, we developed a companion iOS app that communicates with the pen case via Bluetooth Low Energy (BLE). The app provides users with valuable, real-time insights by logging insulin usage, blood glucose levels, food intake, and exercise. This holistic approach empowers users to better understand their body's trends and make informed decisions about their health.</p>
+                <p>This project was so successful that we earned 3rd place in the Hubert E. Storer Engineering Student Entrepreneurial Start-up Award Competition and are in the process of forming an LLC.</p>
+            </div>
+            <button class="toggle-btn" data-target="insultrack-details">
+              <span class="toggle-text">Read More</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="tags"><span class="tag">Mobile App Development</span><span class="tag">Health App</span><span class="tag">Embedded Systems</span><span class="tag">BLE</span><span class="tag">UI/UX</span></div>
+          </div>
+          <div class="shot"><img src="images/insultrack-shot.png" alt="InsulTrack prototype render"></div>
+        </article>
+        <article class="item project">
+          <div>
+            <h3>DNA/Protein Extraction</h3>
+            <p>Applied molecular biology and bioinformatics to isolate and analyze DNA and proteins from cell cultures.</p>
+            <div class="project-details" id="dna-details">
+                <p>This lab-based project was an opportunity to apply my knowledge of both biomedical science and data analysis. I successfully performed a series of core molecular biology techniques, including **DNA and protein isolation**, **spectrophotometry** to quantify protein concentration, and **gel electrophoresis** to separate and analyze the samples. While some of the lab runs yielded imperfect results, it taught me the importance of meticulous technique and troubleshooting in a scientific environment.</p>
+                <p>The core of this project was using **Python and bioinformatics** to make sense of the results. I wrote custom scripts to analyze the gel images and perform **sequence alignment** using the **Needleman-Wunsch algorithm** to compare genetic relationships between samples. I also developed code to translate DNA sequences into proteins, demonstrating a comprehensive understanding of computational biology principles.</p>
+            </div>
+            <button class="toggle-btn" data-target="dna-details">
+              <span class="toggle-text">Read More</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="tags"><span class="tag">Bioinformatics</span><span class="tag">Molecular Biology</span><span class="tag">Python</span><span class="tag">Data Analysis</span></div>
+          </div>
+          <div class="shot"><img src="https://placehold.co/400x250/111317/9aa3b2?text=DNA+Project" alt="DNA/Protein Extraction project mockup"></div>
+        </article>
+        <article class="item project">
+          <div>
+            <h3>Healthur — Personal Health & Recovery Coach</h3>
+            <p>An iOS app that synthesizes data like HRV, activity, and sleep into a daily health score.</p>
+            <div class="project-details" id="healthur-details">
+                <p>I'm developing Healthur to address a critical gap in the health app market: the lack of truly personalized, actionable insights. While many apps collect vast amounts of data, they often hide valuable information behind paywalls or present it in a way that’s difficult for users to understand.</p>
+                <p>My goal is to provide a comprehensive, free AI-powered assistant that gives users a "Smart Health Score" based on their HRV, sleep, and activity data. The app will meet users wherever they are on their health journey, offering simple, achievable steps and highlighting trends in their health and recovery. For me, privacy is a non-negotiable. I'm building Healthur with a strong emphasis on on-device processing to ensure that no personal health data is ever shared with external servers.</p>
+                <p>The biggest challenge so far has been developing an accurate and adaptable AI model. To make the AI truly helpful, it needs to analyze a wide range of data points to provide genuinely personalized recommendations. This is an ongoing process of data analysis and model training to ensure the AI's suggestions are effective and trustworthy.</p>
+            </div>
+            <button class="toggle-btn" data-target="healthur-details">
+              <span class="toggle-text">Read More</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="tags"><span class="tag">Swift/SwiftUI</span><span class="tag">HealthKit</span><span class="tag">Privacy</span></div>
+          </div>
+          <div class="shot"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <h2>Skills</h2>
+      <div class="card-grid">
+        <div class="card three">
+          <h3>Software</h3>
+          <p class="meta"> Programming: Swift/SwiftUI, Python, C++, Java, R, MATLAB, Git</p>
+        </div>
+        <div class="card three">
+          <h3>Hardware</h3>
+          <p class="meta">Arduino, ESP32/Feather, TIG Welding, sensors, low‑power design</p>
+        </div>
+        <div class="card three">
+          <h3>Health/Science</h3>
+          <p class="meta">HRV & VO<sub>2</sub>max analysis, bioimaging, signal processing</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <h2>Publications</h2>
+      <div class="card-grid">
+        <div class="card two">
+          <h3>[Title of Publication]</h3>
+          <p class="meta">Authors: E. Cummings, J. Smith, A. Johnson</p>
+          <p class="meta">Journal of Biomedical Engineering, 2024</p>
+          <p style="font-size:14px;margin-top:10px;">[Brief abstract or summary of the publication's findings and your contribution.]</p>
+          <a href="#" style="font-size:14px;text-decoration:underline;color:var(--acc);margin-top:10px;display:block">Read article &rarr;</a>
+        </div>
+        <div class="card two">
+          <h3>[Title of Conference Presentation]</h3>
+          <p class="meta">Authors: E. Cummings, S. Lee</p>
+          <p class="meta">Conference on Digital Health, 2023</p>
+          <p style="font-size:14px;margin-top:10px;">[Brief summary of your presentation, including key takeaways or research findings.]</p>
+          <a href="#" style="font-size:14px;text-decoration:underline;color:var(--acc);margin-top:10px;display:block">View poster &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beyond">
+      <h2>Beyond Work</h2>
+      <div class="card-grid">
+        <article class="card three">
+          <p class="kicker">Discipline & Perseverance</p>
+          <h3>Triathlon & Ironman</h3>
+          <p>I am a competitive triathlete who has competed in four half-Ironman, five Olympic-distance, and two sprint triathlons. I also competed at the Collegiate Club Nationals. These experiences have taught me the importance of discipline, perseverance, and methodical planning—skills that are essential for both athletic and professional success.</p>
+        </article>
+        <article class="card three">
+          <p class="kicker">Exploration & Growth</p>
+          <h3>Outdoor Adventures</h3>
+          <p>I find balance and rejuvenation in the outdoors through activities like backpacking, bikepacking, and kayak camping in national parks. These adventures fuel my curiosity and reinforce my ability to navigate and solve problems in new and unfamiliar environments.</p>
+        </article>
+        <article class="card three">
+          <p class="kicker">New Interests</p>
+          <h3>Sustainable Energy & AR/VR</h3>
+          <p>In my free time, I'm currently expanding my knowledge in the fields of sustainable energy and augmented reality/virtual reality. I believe these emerging technologies hold immense potential and I'm excited to explore how they can be applied to solve real-world problems.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <div class="card" style="text-align:center">
+        <h3>Let's build something together.</h3>
+        <p style="font-size:18px;color:var(--muted);margin:14px 0">Reach out and say hello.</p>
+        <div class="actions" style="justify-content:center">
+          <a id="mailto" class="btn primary"></a>
+          <a class="btn ghost" href="#">LinkedIn Profile &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="text-align:center;font-size:14px">
+      <p>&copy; 2024 Ean Cummings. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
